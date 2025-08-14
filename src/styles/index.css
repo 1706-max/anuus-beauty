@@ -69,6 +69,26 @@ h1, h2, h3, h4, h5, h6 {
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Grid System Variables */
+  --grid-gap-sm: 1rem;
+  --grid-gap-md: 1.5rem;
+  --grid-gap-lg: 2rem;
+  --grid-gap-xl: 3rem;
+  
+  /* Breakpoint Variables */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  
+   /* Container widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
 }
 
 @tailwind base;
@@ -254,9 +274,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Form Elements */
+/* Find this section and update it */
 @layer components {
   .form-input {
-    @apply w-full p-3 border border-medium-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-deep-rose focus:border-transparent transition-all duration-200;
+    @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-deep-rose focus:border-transparent transition-all duration-200;
   }
   
   .form-label {
@@ -441,4 +462,115 @@ body {
 /* Ensure main content doesn't get hidden behind sticky header */
 main {
   scroll-margin-top: 80px; /* Adjust based on your header height */
+}
+
+/* Add these to your grid systems section */
+@layer components {
+  /* Existing grids */
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .section {
+    @apply padding-section;
+  }
+  
+  .grid-2-col {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+  
+  .grid-3-col {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+  
+  .grid-4-col {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+  
+  /* NEW ENHANCED GRIDS */
+  
+  /* Flexible grids */
+  .grid-auto-fit {
+    @apply grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6;
+  }
+  
+  .grid-auto-fill {
+    @apply grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6;
+  }
+  
+  /* Spacing variations */
+  .grid-gap-sm {
+    @apply gap-4;
+  }
+  
+  .grid-gap-md {
+    @apply gap-6;
+  }
+  
+  .grid-gap-lg {
+    @apply gap-8;
+  }
+  
+  .grid-gap-xl {
+    @apply gap-12;
+  }
+  
+  /* Responsive grid helpers */
+  .grid-cols-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+  
+  .grid-masonry {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+  
+  /* Aspect ratio grids */
+  .grid-aspect-square {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+  }
+  
+  .grid-aspect-portrait {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+  }
+  
+  /* Masonry-style grid for gallery */
+  .grid-masonry-gallery {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+  }
+}
+
+/* Add to utilities layer */
+@layer utilities {
+  /* Grid gap utilities */
+  .gap-sm { gap: var(--grid-gap-sm); }
+  .gap-md { gap: var(--grid-gap-md); }
+  .gap-lg { gap: var(--grid-gap-lg); }
+  .gap-xl { gap: var(--grid-gap-xl); }
+  
+  /* Column span utilities */
+  .col-span-full { @apply col-span-full; }
+  .col-span-1 { @apply col-span-1; }
+  .col-span-2 { @apply col-span-2; }
+  .col-span-3 { @apply col-span-3; }
+  .col-span-4 { @apply col-span-4; }
+  
+  /* Row span utilities */
+  .row-span-1 { @apply row-span-1; }
+  .row-span-2 { @apply row-span-2; }
+  .row-span-3 { @apply row-span-3; }
+  
+  /* Grid alignment */
+  .grid-items-start { @apply items-start; }
+  .grid-items-center { @apply items-center; }
+  .grid-items-end { @apply items-end; }
+  
+  .grid-content-start { @apply content-start; }
+  .grid-content-center { @apply content-center; }
+  .grid-content-end { @apply content-end; }
+  
+  .grid-justify-start { @apply justify-start; }
+  .grid-justify-center { @apply justify-center; }
+  .grid-justify-end { @apply justify-end; }
+  .grid-justify-between { @apply justify-between; }
+  .grid-justify-around { @apply justify-around; }
 }
