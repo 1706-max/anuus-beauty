@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import foundersPhoto from '../assets/images/foundersPhoto/FoundersPhoto.jpg'
+import flexi from '../assets/images/whychooseus/flexi.jpg'
 
 export default function About() {
   // Team members data
@@ -324,7 +325,12 @@ export default function About() {
                 <div className="w-64 h-64 bg-gold rounded-lg opacity-20 absolute -top-4 -left-4"></div>
                 <div className="w-64 h-64 bg-deep-rose rounded-lg opacity-20 absolute -bottom-4 -right-4"></div>
                 <div className="relative w-64 h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <span className="text-charcoal-gray">Why Choose Us Image</span>
+                  <img
+                    src={flexi}
+                    alt="why choose us image"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
