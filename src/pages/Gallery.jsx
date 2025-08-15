@@ -1,112 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-//Later add the photos to the asstes pages according to the catgory and delete the placeholder items given below. that are mentioned with ids
-//import beauty1 from '../assets/images/gallery/beauty/beauty1.jpg'
-//import fashion1 from '../assets/images/gallery/fashion/fashion1.jpg'
-// ... import all your images
+import { importGalleryImages, getGalleryCategories } from '../utils/imageImporter'
+
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('all')
-  
-  // Gallery categories
-  const categories = [
-    { id: 'all', name: 'All Work' },
-    { id: 'beauty', name: 'Beauty' },
-    { id: 'fashion', name: 'Fashion Design' },
-    { id: 'before-after', name: 'Before & After' }
-  ]
+  const [galleryItems, setGalleryItems] = useState([])
+  const [categories, setCategories] = useState([])
 
-  // Gallery items (using placeholder images for now)
-  const galleryItems = [
-    {
-      id: 1,
-      category: 'beauty',
-      title: 'Bridal Makeup',
-      description: 'Complete bridal beauty transformation',
-      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c5ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 2,
-      category: 'fashion',
-      title: 'Custom Wedding Dress',
-      description: 'Handcrafted bridal gown design',
-      image: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 3,
-      category: 'before-after',
-      title: 'Skincare Transformation',
-      description: '4-week skincare treatment results',
-      image: 'https://images.unsplash.com/photo-1598974357801-cbca100e65d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 4,
-      category: 'beauty',
-      title: 'Evening Glam',
-      description: 'Red carpet makeup application',
-      image: 'https://images.unsplash.com/photo-1591369822091-658b8d0d8c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 5,
-      category: 'fashion',
-      title: 'Cocktail Dress Design',
-      description: 'Custom party dress creation',
-      image: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 6,
-      category: 'before-after',
-      title: 'Hair Transformation',
-      description: 'Complete hair styling makeover',
-      image: 'https://images.unsplash.com/photo-1599594882389-9f8462c5f60a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 7,
-      category: 'beauty',
-      title: 'Spa Treatment',
-      description: 'Relaxing facial and massage session',
-      image: 'https://images.unsplash.com/photo-1577222282862-98c49046b550?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 8,
-      category: 'fashion',
-      title: 'Formal Wear',
-      description: 'Custom business attire design',
-      image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 9,
-      category: 'before-after',
-      title: 'Nail Art Design',
-      description: 'Luxury manicure and pedicure',
-      image: 'https://images.unsplash.com/photo-1600133161762-0a2d38a8c6d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 10,
-      category: 'beauty',
-      title: 'Bridal Hair',
-      description: 'Elegant bridal hairstyle',
-      image: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 11,
-      category: 'fashion',
-      title: 'Evening Gown',
-      description: 'Custom formal evening dress',
-      image: 'https://images.unsplash.com/photo-1534525439824-9d0d01a2a3c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 12,
-      category: 'before-after',
-      title: 'Makeup Artistry',
-      description: 'Professional makeup transformation',
-      image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  useEffect(() => {
+    console.log('Gallery component mounting...');
+    try {
+      const images = importGalleryImages();
+      console.log('Imported images:', images);
+      setGalleryItems(images);
+      
+      const cats = getGalleryCategories(images);
+      console.log('Generated categories:', cats);
+      setCategories(cats);
+    } catch (error) {
+      console.error('Error in Gallery useEffect:', error);
+      setGalleryItems([]);
+      setCategories([{ id: 'all', name: 'All Work' }]);
     }
-  ]
+  }, []);
 
   // Filter gallery items based on active category
   const filteredItems = activeCategory === 'all' 
     ? galleryItems 
     : galleryItems.filter(item => item.category === activeCategory)
+
+  console.log('Rendering gallery with items:', galleryItems);
+  console.log('Active category:', activeCategory);
+  console.log('Filtered items:', filteredItems);
 
   return (
     <div className="bg-cream-white">
@@ -115,8 +40,7 @@ export default function Gallery() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="heading-1 text-deep-rose mb-6">Our Gallery</h1>
           <p className="body-large text-charcoal-gray max-w-3xl mx-auto">
-            Explore our portfolio of beauty transformations and custom fashion designs. 
-            Each image represents our commitment to excellence and attention to detail.
+            Explore our portfolio of beauty transformations and custom fashion designs.
           </p>
         </div>
       </section>
@@ -124,86 +48,75 @@ export default function Gallery() {
       {/* Category Filter */}
       <section className="section py-8">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? 'bg-deep-rose text-white shadow-md'
-                    : 'bg-white text-charcoal-gray hover:bg-light-gray border border-light-gray'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
+          {categories.length > 1 && (
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                    activeCategory === category.id
+                      ? 'bg-deep-rose text-white shadow-md'
+                      : 'bg-white text-charcoal-gray hover:bg-light-gray border border-light-gray'
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Gallery Grid */}
-          {/* Replace existing gallery grid with enhanced version */}
-          <div className="grid-masonry-gallery gap-md">
-            {filteredItems.map((item) => (
-              <div 
-                key={item.id} 
-                className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                                      src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    {item.image ? (
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          console.log('Image failed to load:', item.image);
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                    ) : null}
+                    <div 
+                      className={`w-full h-full flex items-center justify-center ${item.image ? 'hidden' : 'flex'}`}
+                      style={{ backgroundColor: '#F8E1E7' }}
+                    >
+                      <div className="text-center p-2">
+                        <div className="w-12 h-12 bg-deep-rose rounded-full flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <h3 className="font-semibold text-deep-rose text-sm">{item.title}</h3>
+                        <p className="text-xs text-charcoal-gray mt-1">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-gray/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <h3 className="text-white text-lg font-semibold">{item.title}</h3>
-                  <p className="text-cream-white text-xs">{item.description}</p>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-16">
+                <div className="w-24 h-24 bg-primary-pink rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-12 h-12 text-deep-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
-                              </div>
-              ))}
-          </div>
-
-          {/* Load More Button */}
-          <div className="text-center mt-12">
-            <button className="btn-outline btn-large">
-              Load More
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Instagram Feed Preview */}
-      <section className="section bg-light-gray">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="heading-2 text-deep-rose mb-4">Follow Us on Instagram</h2>
-            <p className="body-large text-charcoal-gray max-w-3xl mx-auto">
-              For daily updates, behind-the-scenes content, and real-time transformations.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="aspect-square overflow-hidden rounded-lg">
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-charcoal-gray text-sm">Instagram Post {item}</span>
-                </div>
+                <h3 className="heading-3 text-deep-rose mb-4">No Images Found</h3>
+                <p className="text-charcoal-gray">
+                  We're working on adding amazing work to our portfolio.
+                </p>
               </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-8">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-deep-rose font-semibold hover:text-deep-rose/80 transition-colors"
-            >
-              Follow @anuusbeauty on Instagram
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+            )}
           </div>
         </div>
       </section>
@@ -211,7 +124,7 @@ export default function Gallery() {
       {/* CTA Section */}
       <section className="section bg-deep-rose">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="heading-2 text-white mb-6">Love What You See?</h2>
+          <h2 className="heading-2 text-white mb-6">See Our Work</h2>
           <p className="body-large text-cream-white mb-8 max-w-3xl mx-auto">
             Book your appointment today and let us create your own transformation story.
           </p>

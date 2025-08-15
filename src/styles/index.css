@@ -547,13 +547,13 @@ main {
   .gap-lg { gap: var(--grid-gap-lg); }
   .gap-xl { gap: var(--grid-gap-xl); }
   
-  /* Column span utilities */
+  /* Column span utilities
   .col-span-full { @apply col-span-full; }
   .col-span-1 { @apply col-span-1; }
   .col-span-2 { @apply col-span-2; }
   .col-span-3 { @apply col-span-3; }
   .col-span-4 { @apply col-span-4; }
-  
+   */
   /* Row span utilities */
   .row-span-1 { @apply row-span-1; }
   .row-span-2 { @apply row-span-2; }
