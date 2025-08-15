@@ -1,6 +1,10 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import { Link } from 'react-router-dom'
+import mehndi from '../assets/images/services/mehndi.jpeg'
+import saree1 from '../assets/images/gallery/fashion/saree1.jpeg'
+import beforeafter from '../assets/images/gallery/beforeafter/beforeafter.jpeg'
+import dressdesign from '../assets/images/gallery/fashion/boutique1.jpg'
 
 export default function Home() {
   return (
@@ -188,16 +192,36 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
               <div className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-charcoal-gray">Beauty Work</span>
+                <img 
+                  src={mehndi}
+                  alt="beauty work"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  />
               </div>
               <div className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-charcoal-gray">Dress Design</span>
+                 <img
+                 src={dressdesign}
+                 alt="custom designed"
+                 className="w-full h-full object-cover"
+                 loading="lazy"
+                 /> 
               </div>
               <div className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-charcoal-gray">Before/After</span>
+                <img
+                  src={saree1}
+                  alt="saree image"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-charcoal-gray">Fashion Show</span>
+                <img
+                src={beforeafter}
+                alt="before after image"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                />
               </div>
             </div>
 

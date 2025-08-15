@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import foundersPhoto from '../assets/images/foundersPhoto/FoundersPhoto.jpg'
 
 export default function About() {
   // Team members data
@@ -103,7 +104,12 @@ export default function About() {
                 <div className="w-64 h-64 md:w-80 md:h-80 bg-gold rounded-full absolute -top-4 -left-4 opacity-20"></div>
                 <div className="w-64 h-64 md:w-80 md:h-80 bg-deep-rose rounded-full absolute -bottom-4 -right-4 opacity-20"></div>
                 <div className="relative w-64 h-64 md:w-80 md:h-80 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
-                  <span className="text-charcoal-gray">Founder Photo</span>
+                <img 
+                  src={foundersPhoto} 
+                  alt="Sri Latha & Swathi - Founders of Anuus Beauty Parlor & Boutique"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
                 </div>
               </div>
             </div>
