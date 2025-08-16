@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 // Import Beauty Service Images
-import bridalMakeupImg from '../assets/images/services/Bridalmakeup.jpeg'
-import eyebrowsImg from '../assets/images/services/eyebrows.jpeg'
+import bridalMakeupImg from '../assets/images/services/bridalmakeup2.jpg'
+import eyebrowsImg from '../assets/images/services/eyebrows.jpg'
 import facialImg from '../assets/images/services/facial.jpeg'
 import haircutImg from '../assets/images/services/haircut.jpeg'
 import hairTreatmentImg from '../assets/images/services/hairtreatment.jpeg'
