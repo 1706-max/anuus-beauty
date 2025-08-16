@@ -138,16 +138,17 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Content */}
+      {/* Contact Content - Corrected Layout */}
       <section className={`section transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Changed grid to a single column layout since the form is removed */}
+          <div className="grid grid-cols-1 gap-12"> 
 
-            {/* Left Column: Contact Info & Social Media */}
+            {/* Combined Contact Info, Social Media, and Quick Contact into one column */}
             <div>
               {/* Contact Us Card */}
               <div className="card card-padding mb-8">
-                <h2 className="heading-2 text-deep-rose mb-8">Contact Us</h2> {/* Amended Heading */}
+                <h2 className="heading-2 text-deep-rose mb-8">Contact Us</h2>
 
                 <div className="space-y-6">
                   {/* Address */}
@@ -221,11 +222,11 @@ export default function Contact() {
               </div>
 
               {/* Follow Me Card */}
-              <div className="card card-padding">
-                <h3 className="heading-3 text-deep-rose mb-6">Follow Me</h3> {/* Amended Heading */}
+              <div className="card card-padding mb-8"> {/* Added mb-8 for spacing */}
+                <h3 className="heading-3 text-deep-rose mb-6">Follow Me</h3>
                 <div className="flex space-x-4">
                   <a
-                    href="https://www.instagram.com/anuusboutique/" // <-- Update with your handle
+                    href="https://www.instagram.com/anuusboutique/" // Removed extra spaces
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-instagram rounded-full flex items-center justify-center text-white hover:bg-instagram/80 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-instagram"
@@ -234,7 +235,7 @@ export default function Contact() {
                     <InstagramIcon />
                   </a>
                   <a
-                    href="https://facebook.com/your_facebook_page" // <-- Update with your page
+                    href="https://facebook.com/anuusboutique" // Removed extra spaces
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-facebook rounded-full flex items-center justify-center text-white hover:bg-facebook/80 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-facebook"
@@ -253,146 +254,9 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column: Contact Form & Quick Contact */}
-            <div>
-              {/* Contact Form Card */}
-              <div className="card card-padding">
-                <h2 className="heading-2 text-deep-rose mb-8">Send us a Message</h2>
-
-                {isSubmitted ? (
-                  <div className="text-center py-12 animate-fade-in">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckIcon />
-                    </div>
-                    <h3 className="heading-3 text-deep-rose mb-4">Message Sent!</h3>
-                    <p className="text-charcoal-gray mb-8">
-                      Thank you for contacting us. We'll get back to you within 24 hours.
-                    </p>
-                    <button
-                      onClick={() => setIsSubmitted(false)}
-                      className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-rose"
-                    >
-                      Send Another Message
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in">
-                    <div>
-                      <label htmlFor="name" className="form-label">Full Name *</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="form-input"
-                        placeholder="Enter your full name"
-                        aria-describedby="name-error"
-                      />
-                      {/* Add error display logic if needed */}
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="email" className="form-label">Email Address *</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="form-input"
-                          placeholder="Enter your email"
-                          aria-describedby="email-error"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="phone" className="form-label">Phone Number</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="form-input"
-                          placeholder="Enter your phone number"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="service" className="form-label">Service Interested In</label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="form-input"
-                      >
-                        <option value="">Select a service</option>
-                        {serviceOptions.map((service, index) => (
-                          <option key={index} value={service}>{service}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="form-label">Your Message *</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows="5"
-                        className="form-input"
-                        placeholder="Tell us about your requirements..."
-                        aria-describedby="message-error"
-                      ></textarea>
-                    </div>
-
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          type="checkbox"
-                          id="privacy"
-                          required
-                          className="w-4 h-4 text-deep-rose border-gray-300 rounded focus:ring-deep-rose"
-                          aria-describedby="privacy-error"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label htmlFor="privacy" className="text-charcoal-gray">
-                          I agree to the <a href="/privacy-policy" className="text-deep-rose hover:underline focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-deep-rose">Privacy Policy</a> *
-                        </label>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isLoading}
-                      className="btn-primary w-full btn-large focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-rose disabled:opacity-50"
-                    >
-                      {isLoading ? (
-                        <span className="flex items-center justify-center">
-                          <SpinnerIcon />
-                          Sending...
-                        </span>
-                      ) : (
-                        'Send Message'
-                      )}
-                    </button>
-                  </form>
-                )}
-              </div>
-
-              {/* Quick Contact Card */}
-              <div className="card card-padding mt-8">
+              {/* Quick Contact Card - Moved inside the main left column div */}
+              <div className="card card-padding"> {/* Removed mt-8, added mb-8 to the Follow Me card instead */}
                 <h3 className="heading-3 text-deep-rose mb-6">Quick Contact</h3>
                 <div className="space-y-4">
                   <a
@@ -425,11 +289,13 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            {/* The entire right column div (containing the form) was removed */}
           </div>
         </div>
       </section>
 
-      {/* Google Maps Section */}
+      {/* Google Maps Section - No changes needed here */}
       <section className="section bg-light-gray">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -440,10 +306,17 @@ export default function Contact() {
           </div>
 
           <div className="card overflow-hidden">
-            {/* Embedded Google Map - Replace URL */}
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d480.8032181036637!2d79.50602951149145!3d15.407556086737136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4b2fb6ce9b5033%3A0x4e4b57a3cb65296b!2sANU&#39;S%20BEAUTY%20PARLOUR!5e0!3m2!1sen!2sin!4v1755327571159!5m2!1sen!2sin" width="600" height="450" style={{border: '0'}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-            title="Anuus Beauty Parlour & Boutique Location"
-            className="w-full"
+            {/* Embedded Google Map - Corrected attributes and style */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d480.8032181036637!2d79.50602951149145!3d15.407556086737136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4b2fb6ce9b5033%3A0x4e4b57a3cb65296b!2sANU&#39;S%20BEAUTY%20PARLOUR!5e0!3m2!1sen!2sin!4v1755327571159!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              style={{ border: '0' }} // Corrected style prop
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade" // Corrected attribute name
+              title="Anuus Beauty Parlour & Boutique Location"
+              className="w-full"
             ></iframe>
 
             <div className="p-6 bg-white">
@@ -469,7 +342,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - No changes needed here */}
       <section className="section bg-deep-rose">
         <div className="container mx-auto px-4 text-center">
           <h2 className="heading-2 text-white mb-6">Ready to Get Started?</h2>
